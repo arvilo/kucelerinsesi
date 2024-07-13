@@ -1,0 +1,23 @@
+import classNames from "classnames";
+import { ErrorMessage, useField } from "formik";
+
+const Input = ({ label, ...props }) => {
+    const [field, meta, helpers] = useField(props);
+    return (
+        <label className='w-full gap-3 items-center'>
+            <div className='text-sm shrink-0 text-gray-600'>{label}</div>
+            <input
+                className={classNames({
+                    "w-full rounded h-10 border outline-none ps-2": true,
+                    "focus:border-black": !meta.error || !meta.touched,
+                    "border-red-600": meta.error && meta.touched,
+                })}
+                {...field}
+                {...props}
+            />
+            <ErrorMessage className='text-red-600' component={"small"} name={field.name} />
+        </label>
+    );
+};
+
+export default Input;
