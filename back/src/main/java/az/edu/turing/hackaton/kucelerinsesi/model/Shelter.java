@@ -1,5 +1,4 @@
 package az.edu.turing.hackaton.kucelerinsesi.model;
-
 // Shelter entitisi
 public class Shelter {
     private Long id;
