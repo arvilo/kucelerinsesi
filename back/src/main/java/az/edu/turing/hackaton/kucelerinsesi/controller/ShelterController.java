@@ -6,6 +6,7 @@ import az.edu.turing.hackaton.kucelerinsesi.dto.response.ShelterResponse;
 import az.edu.turing.hackaton.kucelerinsesi.dto.response.TokenResponse;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShelterController {
@@ -30,6 +31,8 @@ public class ShelterController {
     }
 
     public List<ShelterResponse> getAllShelters() {
-        return null;
+        ArrayList<ShelterResponse> shelterResponses =  new ArrayList<>();
+//        shelterResponses.add(ShelterResponse.builder().build());
+        return shelterResponses;
     }
 }
