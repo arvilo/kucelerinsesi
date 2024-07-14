@@ -1,29 +1,29 @@
 package az.edu.turing.hackaton.kucelerinsesi.dao.impl;
 
 import az.edu.turing.hackaton.kucelerinsesi.dao.DAO;
-import az.edu.turing.hackaton.kucelerinsesi.dao.ShelterEntity;
-import az.edu.turing.hackaton.kucelerinsesi.exception.ShelterNotFoundException;
 import az.edu.turing.hackaton.kucelerinsesi.exception.ShelterFileException;
+import az.edu.turing.hackaton.kucelerinsesi.exception.ShelterNotFoundException;
+import az.edu.turing.hackaton.kucelerinsesi.model.Shelter;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ShelterFileDao implements DAO<ShelterEntity> {
+public class ShelterFileDao implements DAO<Shelter> {
     private String filePath = "az/edu/turing/hackaton/kucelerinsesi/resource/shelters.ser";
 
     @Override
-    public void insert(ShelterEntity shelter) throws IOException {
-        List<ShelterEntity> shelters = readSheltersFromFile();
+    public void insert(Shelter shelter) throws IOException {
+        List<Shelter> shelters = readSheltersFromFile();
         shelter.setId(generateId(shelters));
         shelters.add(shelter);
         writeSheltersToFile(shelters);
     }
 
     @Override
-    public ShelterEntity selectById(Long id) {
-        List<ShelterEntity> shelters = readSheltersFromFile();
+    public Shelter selectById(Long id) {
+        List<Shelter> shelters = readSheltersFromFile();
         return shelters.stream()
                 .filter(shelter -> shelter.getId().equals(id))
                 .findFirst()
@@ -31,10 +31,10 @@ public class ShelterFileDao implements DAO<ShelterEntity> {
     }
 
     @Override
-    public List<ShelterEntity> search(String keyword) {
-        List<ShelterEntity> shelters = readSheltersFromFile();
-        List<ShelterEntity> result = new ArrayList<>();
-        for (ShelterEntity shelter : shelters) {
+    public List<Shelter> search(String keyword) {
+        List<Shelter> shelters = readSheltersFromFile();
+        List<Shelter> result = new ArrayList<>();
+        for (Shelter shelter : shelters) {
             if (shelter.getCompanyName().contains(keyword) || shelter.getDescription().contains(keyword)) {
                 result.add(shelter);
             }
@@ -43,9 +43,9 @@ public class ShelterFileDao implements DAO<ShelterEntity> {
     }
 
     @Override
-    public void update(ShelterEntity updatedShelter) throws IOException {
-        List<ShelterEntity> shelters = readSheltersFromFile();
-        Optional<ShelterEntity> existingShelterOpt = shelters.stream()
+    public void update(Shelter updatedShelter) throws IOException {
+        List<Shelter> shelters = readSheltersFromFile();
+        Optional<Shelter> existingShelterOpt = shelters.stream()
                 .filter(shelter -> shelter.getId().equals(updatedShelter.getId()))
                 .findFirst();
 
@@ -60,8 +60,8 @@ public class ShelterFileDao implements DAO<ShelterEntity> {
 
     @Override
     public void delete(Long id) throws IOException {
-        List<ShelterEntity> shelters = readSheltersFromFile();
-        Optional<ShelterEntity> shelterToRemove = shelters.stream()
+        List<Shelter> shelters = readSheltersFromFile();
+        Optional<Shelter> shelterToRemove = shelters.stream()
                 .filter(shelter -> shelter.getId().equals(id))
                 .findFirst();
         if (shelterToRemove.isPresent()) {
@@ -72,15 +72,14 @@ public class ShelterFileDao implements DAO<ShelterEntity> {
         }
     }
 
-    public List<ShelterEntity> readSheltersFromFile() {
-        List<ShelterEntity> shelters = new ArrayList<>();
+    public List<Shelter> readSheltersFromFile() {
+        List<Shelter> shelters = new ArrayList<>();
         File file = new File(filePath);
         if (!file.exists()) {
-            // File not found, return an empty list
             return shelters;
         }
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
-            shelters = (List<ShelterEntity>) ois.readObject();
+            shelters = (List<Shelter>) ois.readObject();
         } catch (FileNotFoundException e) {
             System.err.println("Shelters file not found: " + e.getMessage());
         } catch (IOException | ClassNotFoundException e) {
@@ -89,7 +88,7 @@ public class ShelterFileDao implements DAO<ShelterEntity> {
         return shelters;
     }
 
-    private void writeSheltersToFile(List<ShelterEntity> shelters) {
+    private void writeSheltersToFile(List<Shelter> shelters) {
         try {
             // Create parent directories if they don't exist
             File file = new File(filePath);
@@ -103,9 +102,9 @@ public class ShelterFileDao implements DAO<ShelterEntity> {
         }
     }
 
-    private Long generateId(List<ShelterEntity> shelters) {
+    private Long generateId(List<Shelter> shelters) {
         return shelters.stream()
-                .mapToLong(ShelterEntity::getId)
+                .mapToLong(Shelter::getId)
                 .max()
                 .orElse(0L) + 1;
     }
