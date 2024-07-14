@@ -1,33 +1,108 @@
 package az.edu.turing.hackaton.kucelerinsesi.dao;
 
-import az.edu.turing.hackaton.kucelerinsesi.dao.impl.ShelterFileDao;
-import java.io.IOException;
+import az.edu.turing.hackaton.kucelerinsesi.model.Shelter;
+import az.edu.turing.hackaton.kucelerinsesi.exception.ShelterNotFoundException;
+import az.edu.turing.hackaton.kucelerinsesi.exception.ShelterFileException;
+
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ShelterDAO {
-    private DAO<ShelterEntity> shelterFileDao = new ShelterFileDao();
+    private String filePath = "az/edu/turing/hackaton/kucelerinsesi/resource/shelters.ser";
 
-    public void insertShelter(ShelterEntity shelter) throws IOException {
-        shelterFileDao.insert(shelter);
+    public void insertShelter(Shelter shelter) throws IOException {
+        List<Shelter> shelters = readSheltersFromFile();
+        shelter.setId(generateId(shelters));
+        shelters.add(shelter);
+        writeSheltersToFile(shelters);
     }
 
-    public ShelterEntity selectShelter(Long id) {
-        return shelterFileDao.selectById(id);
+    public Shelter selectShelter(Long id) {
+        List<Shelter> shelters = readSheltersFromFile();
+        return shelters.stream()
+                .filter(shelter -> shelter.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new ShelterNotFoundException("Shelter not found with id: " + id));
     }
 
-    public List<ShelterEntity> searchShelters(String keyword) {
-        return shelterFileDao.search(keyword);
+    public List<Shelter> searchShelters(String keyword) {
+        List<Shelter> shelters = readSheltersFromFile();
+        List<Shelter> result = new ArrayList<>();
+        for (Shelter shelter : shelters) {
+            if (shelter.getCompanyName().contains(keyword) || shelter.getDescription().contains(keyword)) {
+                result.add(shelter);
+            }
+        }
+        return result;
     }
 
-    public void updateShelter(ShelterEntity shelter) throws IOException {
-        shelterFileDao.update(shelter);
+    public void updateShelter(Shelter updatedShelter) throws IOException {
+        List<Shelter> shelters = readSheltersFromFile();
+        Optional<Shelter> existingShelterOpt = shelters.stream()
+                .filter(shelter -> shelter.getId().equals(updatedShelter.getId()))
+                .findFirst();
+
+        if (existingShelterOpt.isPresent()) {
+            shelters.remove(existingShelterOpt.get());
+            shelters.add(updatedShelter);
+            writeSheltersToFile(shelters);
+        } else {
+            throw new ShelterNotFoundException("Shelter not found with id: " + updatedShelter.getId());
+        }
     }
 
     public void deleteShelter(Long id) throws IOException {
-        shelterFileDao.delete(id);
+        List<Shelter> shelters = readSheltersFromFile();
+        Optional<Shelter> shelterToRemove = shelters.stream()
+                .filter(shelter -> shelter.getId().equals(id))
+                .findFirst();
+        if (shelterToRemove.isPresent()) {
+            shelters.remove(shelterToRemove.get());
+            writeSheltersToFile(shelters);
+        } else {
+            throw new ShelterNotFoundException("Shelter not found with id: " + id);
+        }
     }
 
-    public DAO<ShelterEntity> getShelterFileDao() {
-        return shelterFileDao;
+    private List<Shelter> readSheltersFromFile() {
+        List<Shelter> shelters = new ArrayList<>();
+        File file = new File(filePath);
+        if (!file.exists()) {
+            return shelters;
+        }
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+            shelters = (List<Shelter>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            System.err.println("Shelters file not found: " + e.getMessage());
+        } catch (IOException | ClassNotFoundException e) {
+            throw new ShelterFileException("Error reading shelters from file", e);
+        }
+        return shelters;
+    }
+
+    private void writeSheltersToFile(List<Shelter> shelters) {
+        try {
+            File file = new File(filePath);
+            file.getParentFile().mkdirs();
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+                oos.writeObject(shelters);
+            }
+            System.out.println("Shelters written to file successfully.");
+        } catch (IOException e) {
+            throw new ShelterFileException("Error writing shelters to file", e);
+        }
+    }
+
+    private Long generateId(List<Shelter> shelters) {
+        return shelters.stream()
+                .mapToLong(Shelter::getId)
+                .max()
+                .orElse(0L) + 1;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }
