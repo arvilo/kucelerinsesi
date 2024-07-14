@@ -1,31 +1,19 @@
 package az.edu.turing.hackaton.kucelerinsesi.service;
 
-import az.edu.turing.hackaton.kucelerinsesi.dao.ShelterDAO;
-import az.edu.turing.hackaton.kucelerinsesi.dao.ShelterEntity;
+import az.edu.turing.hackaton.kucelerinsesi.dto.request.ShelterRequest;
+import az.edu.turing.hackaton.kucelerinsesi.dto.response.ShelterResponse;
 
 import java.io.IOException;
 import java.util.List;
 
-public class ShelterService {
-    private ShelterDAO shelterDao = new ShelterDAO();
+public interface ShelterService {
+    void saveShelter(ShelterRequest shelterRequest) throws IOException;
 
-    public void saveShelter(ShelterEntity shelter) throws IOException {
-        shelterDao.insertShelter(shelter);
-    }
+    ShelterResponse getShelterById(Long id);
 
-    public ShelterEntity getShelterById(Long id) {
-        return shelterDao.selectShelter(id);
-    }
+    List<ShelterResponse> searchShelters(String keyword);
 
-    public List<ShelterEntity> searchShelters(String keyword) {
-        return shelterDao.searchShelters(keyword);
-    }
+    void updateShelter(ShelterRequest shelterRequest, Long id) throws IOException;
 
-    public void updateShelter(ShelterEntity shelter) throws IOException {
-        shelterDao.updateShelter(shelter);
-    }
-
-    public void deleteShelter(Long id) throws IOException {
-        shelterDao.deleteShelter(id);
-    }
+    void deleteShelter(Long id) throws IOException;
 }
