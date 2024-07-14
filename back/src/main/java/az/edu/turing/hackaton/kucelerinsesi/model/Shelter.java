@@ -1,6 +1,9 @@
 package az.edu.turing.hackaton.kucelerinsesi.model;
-// Shelter entitisi
-public class Shelter {
+
+import java.io.Serializable;
+
+public class Shelter implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Long id;
     private String companyName;
     private String email;
@@ -74,4 +77,3 @@ public class Shelter {
         this.workHours = workHours;
     }
 }
-
