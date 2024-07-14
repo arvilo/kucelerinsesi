@@ -1,7 +1,9 @@
-package az.edu.turing.hackaton.kucelerinsesi.model;
+package az.edu.turing.hackaton.kucelerinsesi.dto.request;
 
-public class Pet {
-    private int id;
+import az.edu.turing.hackaton.kucelerinsesi.model.Gender;
+import az.edu.turing.hackaton.kucelerinsesi.model.Species;
+
+public class PetRequest {
     private String nickname;
     private int age;
     private Species species;
@@ -10,14 +12,6 @@ public class Pet {
     private String imagePath;
     private int shelterId;
     private String about;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNickname() {
         return nickname;
@@ -82,5 +76,4 @@ public class Pet {
     public void setAbout(String about) {
         this.about = about;
     }
-
 }

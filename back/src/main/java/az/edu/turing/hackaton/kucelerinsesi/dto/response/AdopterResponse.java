@@ -1,15 +1,12 @@
-package az.edu.turing.hackaton.kucelerinsesi.model;
+package az.edu.turing.hackaton.kucelerinsesi.dto.response;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
-public class Adopter {
+public class AdopterResponse {
     private int id;
     private String name;
     private String surname;
     private String mail;
-    private String password;
     private Date birth;
 
     public int getId() {
@@ -44,14 +41,6 @@ public class Adopter {
         this.mail = mail;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Date getBirth() {
         return birth;
     }
@@ -59,5 +48,4 @@ public class Adopter {
     public void setBirth(Date birth) {
         this.birth = birth;
     }
-
 }

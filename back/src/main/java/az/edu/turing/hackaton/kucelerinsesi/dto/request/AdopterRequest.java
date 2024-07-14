@@ -1,24 +1,16 @@
-package az.edu.turing.hackaton.kucelerinsesi.model;
+package az.edu.turing.hackaton.kucelerinsesi.dto.request;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import az.edu.turing.hackaton.kucelerinsesi.model.Gender;
+import az.edu.turing.hackaton.kucelerinsesi.model.Species;
+
 import java.util.Date;
 
-public class Adopter {
-    private int id;
+public class AdopterRequest {
     private String name;
     private String surname;
     private String mail;
     private String password;
     private Date birth;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -59,5 +51,4 @@ public class Adopter {
     public void setBirth(Date birth) {
         this.birth = birth;
     }
-
 }

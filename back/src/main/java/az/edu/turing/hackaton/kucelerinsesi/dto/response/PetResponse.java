@@ -1,6 +1,9 @@
-package az.edu.turing.hackaton.kucelerinsesi.model;
+package az.edu.turing.hackaton.kucelerinsesi.dto.response;
 
-public class Pet {
+import az.edu.turing.hackaton.kucelerinsesi.model.Gender;
+import az.edu.turing.hackaton.kucelerinsesi.model.Species;
+
+public class PetResponse {
     private int id;
     private String nickname;
     private int age;
@@ -82,5 +85,4 @@ public class Pet {
     public void setAbout(String about) {
         this.about = about;
     }
-
 }

@@ -1,4 +1,4 @@
-package back.az.edu.turing.hackaton.kucelerinsesi.model;
+package az.edu.turing.hackaton.kucelerinsesi.model;
 
 public enum Species {
     DOG,

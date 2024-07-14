@@ -1,7 +1,7 @@
-package back.az.edu.turing.hackaton.kucelerinsesi;
+package az.edu.turing.hackaton.kucelerinsesi;
 
 public class Main {
-    public static void main(String[] args) {
-
-    }
+//    public static void main(String[] args) {
+//
+//    }
 }
