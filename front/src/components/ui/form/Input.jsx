@@ -14,6 +14,7 @@ const Input = ({ label, ...props }) => {
                 })}
                 {...field}
                 {...props}
+                value={field.value || ""}
             />
             <ErrorMessage className='text-red-600' component={"small"} name={field.name} />
         </label>
