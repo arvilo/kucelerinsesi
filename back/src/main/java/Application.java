@@ -1,115 +1,121 @@
+import az.edu.turing.hackaton.kucelerinsesi.controller.ShelterController;
+import az.edu.turing.hackaton.kucelerinsesi.dto.request.ShelterRequest;
+import az.edu.turing.hackaton.kucelerinsesi.dto.response.ShelterResponse;
+import az.edu.turing.hackaton.kucelerinsesi.service.ShelterService;
+import az.edu.turing.hackaton.kucelerinsesi.service.ShelterServiceImpl;
 
-import az.edu.turing.hackaton.kucelerinsesi.dao.ShelterDAO;
-import az.edu.turing.hackaton.kucelerinsesi.dao.ShelterEntity;
-import az.edu.turing.hackaton.kucelerinsesi.dao.impl.ShelterFileDao;
-import az.edu.turing.hackaton.kucelerinsesi.exception.ShelterFileException;
-import az.edu.turing.hackaton.kucelerinsesi.exception.ShelterNotFoundException;
-import java.io.IOException;
+;import java.io.IOException;
 import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-//        ShelterDAO shelterDAO = new ShelterDAO();
+
+//            ShelterController controller = new ShelterController();
 //
+//            ShelterRequest newShelter = new ShelterRequest();
+//            newShelter.setCompanyName("Animal Haven");
+//            newShelter.setEmail("contact@animalhaven.org");
+//            newShelter.setPassword("securepassword");
+//            newShelter.setAddress("123 Animal Street");
+//            newShelter.setPhoneNumber("+123456789");
+//            newShelter.setDescription("A safe place for animals.");
+//            newShelter.setWorkHours("9AM - 5PM");
 //
-//        ShelterEntity newShelter = new ShelterEntity("Happy Paws Shelter", "happypaws@example.com", "password123", "1234 Street, City", "123-456-7890", "We care for stray animals", "09:00-18:00");
-//        try {
-//            shelterDAO.insertShelter(newShelter);
-//            System.out.println("New shelter added with ID: " + newShelter.getId());
-//        } catch (IOException e) {
-//            System.err.println("Error inserting shelter: " + e.getMessage());
-//        }
+//            try {
+//                controller.signUpShelter(newShelter);
+//                System.out.println("Shelter created successfully.");
+//            } catch (IOException e) {
+//                System.err.println("Error creating shelter: " + e.getMessage());
+//            }
 //
+//            // Get shelter by ID
+//            try {
+//                ShelterResponse shelter = controller.getShelterById(1L);
+//                System.out.println("Shelter fetched by ID: " + shelter.getCompanyName());
+//            } catch (RuntimeException e) {
+//                System.err.println("Error fetching shelter by ID: " + e.getMessage());
+//            }
 //
-//        try {
-//            ShelterEntity shelter = shelterDAO.selectShelter(newShelter.getId());
-//            System.out.println("Selected Shelter: " + shelter.getCompanyName());
-//        } catch (ShelterNotFoundException e) {
-//            System.err.println("Error selecting shelter: " + e.getMessage());
-//        }
+//            // Search shelters
+//            List<ShelterResponse> shelters = controller.searchShelters("Animal");
+//            System.out.println("Shelters found: " + shelters.size());
+//            for (ShelterResponse shelter : shelters) {
+//                System.out.println("Found shelter: " + shelter.getCompanyName());
+//            }
 //
+//            // Update shelter
+//            ShelterRequest updatedShelter = new ShelterRequest();
+//            updatedShelter.setCompanyName("Animal Haven Updated");
+//            updatedShelter.setEmail("contact@animalhaven.org");
+//            updatedShelter.setPassword("securepassword");
+//            updatedShelter.setAddress("123 Animal Street");
+//            updatedShelter.setPhoneNumber("+123456789");
+//            updatedShelter.setDescription("An updated safe place for animals.");
+//            updatedShelter.setWorkHours("9AM - 6PM");
 //
-//        List<ShelterEntity> shelters = shelterDAO.searchShelters("Happy");
-//        System.out.println("Search results:");
-//        for (ShelterEntity shelter : shelters) {
-//            System.out.println(" - " + shelter.getCompanyName());
-//        }
+//            try {
+//                controller.updateShelter(updatedShelter, 1L);
+//                System.out.println("Shelter updated successfully.");
+//            } catch (IOException e) {
+//                System.err.println("Error updating shelter: " + e.getMessage());
+//            }
 //
-//
-//        newShelter.setDescription("Updated description");
-//        try {
-//            shelterDAO.updateShelter(newShelter);
-//            System.out.println("Shelter updated.");
-//        } catch (IOException e) {
-//            System.err.println("Error updating shelter: " + e.getMessage());
-//        }
-//
-//        try {
-//            shelterDAO.deleteShelter(newShelter.getId());
-//            System.out.println("Shelter deleted.");
-//        } catch (IOException e) {
-//            System.err.println("Error deleting shelter: " + e.getMessage());
-//        }
-//        System.out.println("************************************************************************************");
-//        System.out.println("");
-        ShelterDAO shelterDAO = new ShelterDAO();
+//            // Delete shelter
+//            try {
+//                controller.deleteShelter(1L);
+//                System.out.println("Shelter deleted successfully.");
+//            } catch (IOException e) {
+//                System.err.println("Error deleting shelter: " + e.getMessage());
+//            }
+        ShelterController controller = new ShelterController();
+        ShelterService service = new ShelterServiceImpl();
 
-
-        String testFilePath = "az/edu/turing/hackaton/kucelerinsesi/resource/shelters_test.ser";
-
-        // Override FILE_PATH in ShelterFileDao for testing
-        ShelterFileDao shelterFileDao = (ShelterFileDao) shelterDAO.getShelterFileDao();
-        shelterFileDao.setFilePath(testFilePath);
-
-
-        ShelterEntity newShelter = new ShelterEntity("Happy Paws Shelter", "happypaws@example.com", "password123", "1234 Street, City", "123-456-7890", "We care for stray animals", "09:00-18:00");
-        try {
-            shelterDAO.insertShelter(newShelter);
-            System.out.println("New shelter added with ID: " + newShelter.getId());
-        } catch (IOException e) {
-            System.err.println("Error inserting shelter: " + e.getMessage());
-        }
-
-        try {
-            ShelterEntity shelter = shelterDAO.selectShelter(newShelter.getId());
-            System.out.println("Selected Shelter: " + shelter.getCompanyName());
-        } catch (ShelterNotFoundException e) {
-            System.err.println("Error selecting shelter: " + e.getMessage());
-        }
-
-
-        List<ShelterEntity> shelters = shelterDAO.searchShelters("Happy");
-        System.out.println("Search results:");
-        for (ShelterEntity shelter : shelters) {
-            System.out.println(" - " + shelter.getCompanyName());
-        }
-
-
-        newShelter.setDescription("Updated description");
-        try {
-            shelterDAO.updateShelter(newShelter);
-            System.out.println("Shelter updated.");
-        } catch (IOException e) {
-            System.err.println("Error updating shelter: " + e.getMessage());
-        }
-
+        // Create a new shelter
+        ShelterRequest newShelter = new ShelterRequest();
+        newShelter.setCompanyName("Animal Haven");
+        newShelter.setEmail("contact@animalhaven.org");
+        newShelter.setPassword("securepassword");
+        newShelter.setAddress("123 Animal Street");
+        newShelter.setPhoneNumber("+123456789");
+        newShelter.setDescription("A safe place for animals.");
+        newShelter.setWorkHours("9AM - 5PM");
 
         try {
-            shelterDAO.deleteShelter(newShelter.getId());
-            System.out.println("Shelter deleted.");
-        } catch (IOException e) {
-            System.err.println("Error deleting shelter: " + e.getMessage());
-        }
+            // Save the new shelter
+            service.saveShelter(newShelter);
+            System.out.println("Shelter created and saved successfully.");
 
+            // Get shelter by ID
+            ShelterResponse shelter = service.getShelterById(1L);
+            System.out.println("Shelter fetched by ID: " + shelter.getCompanyName());
 
-        try {
-            List<ShelterEntity> writtenShelters = shelterFileDao.readSheltersFromFile();
-            System.out.println("Shelters read from file:");
-            for (ShelterEntity shelter : writtenShelters) {
-                System.out.println(" - " + shelter.getCompanyName());
+            // Search shelters
+            List<ShelterResponse> shelters = service.searchShelters("Animal");
+            System.out.println("Shelters found: " + shelters.size());
+            for (ShelterResponse foundShelter : shelters) {
+                System.out.println("Found shelter: " + foundShelter.getCompanyName());
             }
-        } catch (ShelterFileException e) {
-            System.err.println("Error reading shelters from file: " + e.getMessage());
+
+            // Update shelter
+            ShelterRequest updatedShelter = new ShelterRequest();
+            updatedShelter.setCompanyName("Animal Haven Updated");
+            updatedShelter.setEmail("contact@animalhaven.org");
+            updatedShelter.setPassword("securepassword");
+            updatedShelter.setAddress("123 Animal Street");
+            updatedShelter.setPhoneNumber("+123456789");
+            updatedShelter.setDescription("An updated safe place for animals.");
+            updatedShelter.setWorkHours("9AM - 6PM");
+
+            service.updateShelter(updatedShelter, 1L);
+            System.out.println("Shelter updated successfully.");
+
+            // Delete shelter
+            service.deleteShelter(1L);
+            System.out.println("Shelter deleted successfully.");
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        } catch (RuntimeException e) {
+            System.err.println("Error: " + e.getMessage());
         }
     }
 }
