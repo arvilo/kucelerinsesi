@@ -26,7 +26,7 @@ const Login = () => {
                 {({ values, isSubmitting }) => (
                     <Form className='grid gap-y-3 p-4'>
                         <h1 className='text-2xl font-bold mt-3'> Login Form</h1>
-                        <Input name='username' label='Username' />
+                        <Input name='email' type='email' label='Email' />
                         <Input name='password' type='password' label='Password' /> <br />
                         <div className='relative'>
                             <button

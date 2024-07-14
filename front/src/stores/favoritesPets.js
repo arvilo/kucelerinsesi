@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useAuth } from "../context/AuthContext";
-const { token } = useAuth();
+// import { useAuth } from "../context/AuthContext";
+// const { token } = useAuth();
 const initialState = {
     favoritesPets: JSON.parse(localStorage.getItem("favoritesPets")) || [],
 };

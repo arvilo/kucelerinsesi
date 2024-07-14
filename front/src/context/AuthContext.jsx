@@ -1,4 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { getShelters } from "@/services/shelters";
+import { signInShelter } from "@/services/signin";
+import { fetchFavoritesWithAuth } from "@/utils";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -34,7 +37,9 @@ export const AuthProvider = ({ children }) => {
         if (data) {
             setUser(data.email);
             setToken(data.password);
+            
             localStorage.setItem("user-token", data.password);
+            // fetchFavoritesWithAuth(data.password);
             navigate("/");
             return;
         }

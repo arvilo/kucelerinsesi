@@ -1,4 +1,4 @@
 import { postJSON } from "./request";
 
 export const signInAdopter = (data) => postJSON("/signin/adopter", data);
-export const signInShulter = (data) => postJSON("/signin/shulter", data);
+export const signInShelter = (data) => postJSON("/signin/shelter", data);

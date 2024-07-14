@@ -7,19 +7,13 @@ function parseData(data) {
     return formData;
 }
 
-function request(url, data = false, method = "GET", type = "FORM_DATA", headers = {}) {
+function request(url, data = false, method = "GET", type = "FORM_DATA") {
     return new Promise(async (resolve, reject) => {
         const options = {
             method,
-            headers: {
-                ...headers,
-            },
         };
         if (data && (method === "POST" || method === "PUT" || method === "DELETE")) {
             options.body = type === "JSON" ? JSON.stringify(data) : parseData(data);
-            if (type === "JSON") {
-                options.headers["Content-Type"] = "application/json";
-            }
         }
         const res = await fetch(apiURL + url, options);
         const result = await res.json();
