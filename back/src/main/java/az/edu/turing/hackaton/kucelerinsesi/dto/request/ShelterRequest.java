@@ -9,7 +9,6 @@ public class ShelterRequest {
     private String description;
     private String workHours;
 
-    // Getters and Setters
     public String getCompanyName() {
         return companyName;
     }
