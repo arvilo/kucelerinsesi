@@ -1,16 +1,11 @@
 package az.edu.turing.hackaton.kucelerinsesi.dto.request;
 
-import az.edu.turing.hackaton.kucelerinsesi.model.Gender;
-import az.edu.turing.hackaton.kucelerinsesi.model.Species;
-
-import java.util.Date;
-
 public class AdopterRequest {
     private String name;
     private String surname;
     private String mail;
     private String password;
-    private Date birth;
+    private String birth;
 
     public String getName() {
         return name;
@@ -44,11 +39,11 @@ public class AdopterRequest {
         this.password = password;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 }

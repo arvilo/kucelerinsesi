@@ -8,6 +8,7 @@ public class PetResponse {
     private String nickname;
     private int age;
     private Species species;
+    private String breed;
     private Gender gender;
     private String color;
     private String imagePath;
@@ -84,5 +85,12 @@ public class PetResponse {
 
     public void setAbout(String about) {
         this.about = about;
+    }
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
     }
 }

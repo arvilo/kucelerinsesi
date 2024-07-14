@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface PetService {
     List<PetResponse> getAllPets();
+
     PetResponse getPetById(int id);
+
     void savePet(PetRequest petRequest);
+
     void deletePet(int id);
 }

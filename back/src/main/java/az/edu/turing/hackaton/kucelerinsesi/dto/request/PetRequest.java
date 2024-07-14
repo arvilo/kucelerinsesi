@@ -5,12 +5,13 @@ import az.edu.turing.hackaton.kucelerinsesi.model.Species;
 
 public class PetRequest {
     private String nickname;
-    private int age;
-    private Species species;
-    private Gender gender;
+    private String age;
+    private String species;
+    private String breed;
+    private String gender;
     private String color;
     private String imagePath;
-    private int shelterId;
+    private String shelterId;
     private String about;
 
     public String getNickname() {
@@ -21,28 +22,12 @@ public class PetRequest {
         this.nickname = nickname;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
-    }
-
-    public Species getSpecies() {
-        return species;
-    }
-
-    public void setSpecies(Species species) {
-        this.species = species;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
     }
 
     public String getColor() {
@@ -61,19 +46,43 @@ public class PetRequest {
         this.imagePath = imagePath;
     }
 
-    public int getShelterId() {
-        return shelterId;
-    }
-
-    public void setShelterId(int shelterId) {
-        this.shelterId = shelterId;
-    }
-
     public String getAbout() {
         return about;
     }
 
     public void setAbout(String about) {
         this.about = about;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getShelterId() {
+        return shelterId;
+    }
+
+    public void setShelterId(String shelterId) {
+        this.shelterId = shelterId;
     }
 }

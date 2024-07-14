@@ -10,7 +10,7 @@ public class Adopter {
     private String surname;
     private String mail;
     private String password;
-    private Date birth;
+    private String birth;
 
     public int getId() {
         return id;
@@ -52,11 +52,11 @@ public class Adopter {
         this.password = password;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 

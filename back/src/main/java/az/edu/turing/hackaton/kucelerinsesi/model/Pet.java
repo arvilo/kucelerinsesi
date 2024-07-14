@@ -4,6 +4,7 @@ public class Pet {
     private int id;
     private String nickname;
     private int age;
+    private String breed;
     private Species species;
     private Gender gender;
     private String color;
@@ -81,6 +82,14 @@ public class Pet {
 
     public void setAbout(String about) {
         this.about = about;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
     }
 
 }

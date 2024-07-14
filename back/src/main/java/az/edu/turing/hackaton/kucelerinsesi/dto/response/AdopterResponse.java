@@ -1,13 +1,12 @@
 package az.edu.turing.hackaton.kucelerinsesi.dto.response;
 
-import java.util.Date;
 
 public class AdopterResponse {
     private int id;
     private String name;
     private String surname;
     private String mail;
-    private Date birth;
+    private String birth;
 
     public int getId() {
         return id;
@@ -41,11 +40,11 @@ public class AdopterResponse {
         this.mail = mail;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 }

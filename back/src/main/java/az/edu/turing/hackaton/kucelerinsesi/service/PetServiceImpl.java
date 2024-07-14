@@ -3,7 +3,9 @@ package az.edu.turing.hackaton.kucelerinsesi.service;
 import az.edu.turing.hackaton.kucelerinsesi.dao.PetDao;
 import az.edu.turing.hackaton.kucelerinsesi.dto.request.PetRequest;
 import az.edu.turing.hackaton.kucelerinsesi.dto.response.PetResponse;
+import az.edu.turing.hackaton.kucelerinsesi.model.Gender;
 import az.edu.turing.hackaton.kucelerinsesi.model.Pet;
+import az.edu.turing.hackaton.kucelerinsesi.model.Species;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +22,7 @@ public class PetServiceImpl implements PetService {
                     dto.setNickname(pet.getNickname());
                     dto.setAge(pet.getAge());
                     dto.setSpecies(pet.getSpecies());
+                    dto.setBreed(pet.getBreed());
                     dto.setGender(pet.getGender());
                     dto.setColor(pet.getColor());
                     dto.setImagePath(pet.getImagePath());
@@ -37,6 +40,7 @@ public class PetServiceImpl implements PetService {
         dto.setNickname(pet.getNickname());
         dto.setAge(pet.getAge());
         dto.setSpecies(pet.getSpecies());
+        dto.setBreed(pet.getBreed());
         dto.setGender(pet.getGender());
         dto.setColor(pet.getColor());
         dto.setImagePath(pet.getImagePath());
@@ -49,12 +53,13 @@ public class PetServiceImpl implements PetService {
     public void savePet(PetRequest petRequest) {
         Pet pet = new Pet();
         pet.setNickname(petRequest.getNickname());
-        pet.setAge(petRequest.getAge());
-        pet.setSpecies(petRequest.getSpecies());
-        pet.setGender(petRequest.getGender());
+        pet.setAge(Integer.parseInt(petRequest.getAge()));
+        pet.setSpecies(Species.valueOf(petRequest.getSpecies()));
+        pet.setBreed(petRequest.getBreed());
+        pet.setGender(Gender.valueOf(petRequest.getGender()));
         pet.setColor(petRequest.getColor());
         pet.setImagePath(petRequest.getImagePath());
-        pet.setShelterId(petRequest.getShelterId());
+        pet.setShelterId(Integer.parseInt(petRequest.getShelterId()));
         pet.setAbout(petRequest.getAbout());
         petDao.savePet(pet);
     }
