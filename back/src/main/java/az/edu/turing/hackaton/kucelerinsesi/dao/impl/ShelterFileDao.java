@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class ShelterFileDao implements DAO<Shelter> {
-    private String filePath = "az/edu/turing/hackaton/kucelerinsesi/resource/shelters.ser";
+    private static String RESOURCE_PATH = "src/main/java/az/edu/turing/hackaton/kucelerinsesi/resource";
+    private static final String SHELTER_FILE_PATH = RESOURCE_PATH.concat("/shelters.ser");
 
     @Override
     public void insert(Shelter shelter) throws IOException {
@@ -74,11 +75,11 @@ public class ShelterFileDao implements DAO<Shelter> {
 
     public List<Shelter> readSheltersFromFile() {
         List<Shelter> shelters = new ArrayList<>();
-        File file = new File(filePath);
+        File file = new File(SHELTER_FILE_PATH);
         if (!file.exists()) {
             return shelters;
         }
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SHELTER_FILE_PATH))) {
             shelters = (List<Shelter>) ois.readObject();
         } catch (FileNotFoundException e) {
             System.err.println("Shelters file not found: " + e.getMessage());
@@ -90,8 +91,7 @@ public class ShelterFileDao implements DAO<Shelter> {
 
     private void writeSheltersToFile(List<Shelter> shelters) {
         try {
-            // Create parent directories if they don't exist
-            File file = new File(filePath);
+            File file = new File(SHELTER_FILE_PATH);
             file.getParentFile().mkdirs();
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
                 oos.writeObject(shelters);
@@ -110,6 +110,6 @@ public class ShelterFileDao implements DAO<Shelter> {
     }
 
     public void setFilePath(String filePath) {
-        this.filePath = filePath;
+        // Optional: if you want to set a custom file path dynamically
     }
 }
