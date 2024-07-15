@@ -76,11 +76,17 @@ public class ShelterFileDao implements DAO<Shelter> {
     public List<Shelter> readSheltersFromFile() {
         List<Shelter> shelters = new ArrayList<>();
         File file = new File(SHELTER_FILE_PATH);
-        if (!file.exists()) {
+        if (!file.exists() || file.length() == 0) {
+
             return shelters;
         }
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SHELTER_FILE_PATH))) {
             shelters = (List<Shelter>) ois.readObject();
+        } catch (EOFException e) {
+            // EOFException baş verəndə, bu, faylın sonuna çatıldığını göstərir
+            // Bu vəziyyətdə boş siyahı qaytarmaq uyğundur
+            System.out.println("EOFException caught: End of file reached, returning empty list.");
+            shelters = new ArrayList<>(); // Boş siyahı qaytar
         } catch (FileNotFoundException e) {
             System.err.println("Shelters file not found: " + e.getMessage());
         } catch (IOException | ClassNotFoundException e) {
