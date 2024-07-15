@@ -3,9 +3,11 @@ import React, { useContext } from "react";
 import styles from "./header.module.scss";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 
 const Header = () => {
     const { theme, changeTheme } = useContext(ThemeContext);
+    const { token, logOut } = useAuth();
     return (
         <>
             <div>
@@ -20,14 +22,20 @@ const Header = () => {
                         <input type='text' name='' id='' placeholder='Axtarın' className={`${styles.searchInp} links`} />
                         <FaSearch className={`${styles.icon} search-icon`} />
                     </div>
-                    <div className='flex'>
-                        <Link to='/register' className={`${styles.btn1} block`}>
-                            Qeydiyyatdan keç
-                        </Link>
-                        <Link to='/login' className={`${styles.btn2} block`}>
-                            Daxil ol
-                        </Link>
-                    </div>
+                    {!token ? (
+                        <div className='flex'>
+                            <Link to='/register' className={`${styles.btn1} block`}>
+                                Qeydiyyatdan keç
+                            </Link>
+                            <Link to='/login' className={`${styles.btn2} block`}>
+                                Daxil ol
+                            </Link>
+                        </div>
+                    ) : (
+                        <button className={`${styles.btn1} `} onClick={logOut}>
+                            Çıxış et
+                        </button>
+                    )}
                 </div>
             </div>
         </>
