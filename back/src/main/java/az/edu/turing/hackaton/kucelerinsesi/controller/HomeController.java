@@ -180,5 +180,25 @@ public class HomeController {
         return ResponseEntity.ok(shelterController.getAllShelters());
     }
 
+    //pets/{token}
+    @PostMapping("pets/{token}")
+    public ResponseEntity<PetResponse> addPet(@RequestBody PetRequest petRequest) {
+        int statuscode;
+        PetResponse pr = petController.addPet(petRequest);
+        if (pr != null) {
+            statuscode = 200;
+        } else {
+            statuscode = 404;
+        }
+
+        return ResponseEntity.status(statuscode).body(pr);
+    }
+
+    //pets/{id}/{token}
+    @DeleteMapping("pets/{id}/{token}")
+    public ResponseEntity<String> deletePet(@PathVariable String id, @PathVariable String token) {
+        return ResponseEntity.status(petController.deletePat(id, token) ? 200 : 404).body("");
+    }
+
 
 }
