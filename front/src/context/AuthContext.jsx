@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
         if (data) {
             setUser(data.email);
             setToken(data.password);
-            
+
             localStorage.setItem("user-token", data.password);
             // fetchFavoritesWithAuth(data.password);
             navigate("/");
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
         setUser("");
         setToken("");
         localStorage.removeItem("user-token");
-        navigate("/login");
+        navigate("/");
     };
     const data = { user, token, loginAction, logOut };
 
