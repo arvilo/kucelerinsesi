@@ -60,7 +60,7 @@ public class Application {
 //                System.err.println("Error updating shelter: " + e.getMessage());
 //            }
 //
-//            // Delete shelter
+//
 //            try {
 //                controller.deleteShelter(1L);
 //                System.out.println("Shelter deleted successfully.");
