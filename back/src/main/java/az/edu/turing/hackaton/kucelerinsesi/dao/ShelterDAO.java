@@ -1,8 +1,8 @@
 package az.edu.turing.hackaton.kucelerinsesi.dao;
 
-import az.edu.turing.hackaton.kucelerinsesi.model.Shelter;
-import az.edu.turing.hackaton.kucelerinsesi.exception.ShelterNotFoundException;
 import az.edu.turing.hackaton.kucelerinsesi.exception.ShelterFileException;
+import az.edu.turing.hackaton.kucelerinsesi.exception.ShelterNotFoundException;
+import az.edu.turing.hackaton.kucelerinsesi.model.Shelter;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class ShelterDAO {
-    private String filePath = "az/edu/turing/hackaton/kucelerinsesi/resource/shelters.ser";
+    private static String RESOURCE_PATH = "src/main/java/az/edu/turing/hackaton/kucelerinsesi/resource";
+    private static final String SHELTER_FILE_PATH = RESOURCE_PATH.concat("/shelters.ser");
 
     public void insertShelter(Shelter shelter) throws IOException {
         List<Shelter> shelters = readSheltersFromFile();
@@ -68,11 +69,11 @@ public class ShelterDAO {
 
     private List<Shelter> readSheltersFromFile() {
         List<Shelter> shelters = new ArrayList<>();
-        File file = new File(filePath);
+        File file = new File(SHELTER_FILE_PATH);
         if (!file.exists()) {
             return shelters;
         }
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(SHELTER_FILE_PATH))) {
             shelters = (List<Shelter>) ois.readObject();
         } catch (FileNotFoundException e) {
             System.err.println("Shelters file not found: " + e.getMessage());
@@ -84,7 +85,7 @@ public class ShelterDAO {
 
     private void writeSheltersToFile(List<Shelter> shelters) {
         try {
-            File file = new File(filePath);
+            File file = new File(SHELTER_FILE_PATH);
             file.getParentFile().mkdirs();
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
                 oos.writeObject(shelters);
@@ -99,10 +100,6 @@ public class ShelterDAO {
         return shelters.stream()
                 .mapToLong(Shelter::getId)
                 .max()
-                .orElse(0L) + 1;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
+                .orElse(0L)+1;
+}
 }
