@@ -9,7 +9,6 @@ public class ShelterResponse {
     private String description;
     private String workHours;
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
