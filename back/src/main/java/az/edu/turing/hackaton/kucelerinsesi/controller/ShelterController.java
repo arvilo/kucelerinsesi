@@ -18,14 +18,6 @@ public class ShelterController {
         return null;
     }
 
-    public ShelterResponse signupAsAdopter(AdopterRequest adopterRequest) {
-        return null;
-    }
-
-    public TokenResponse signinAsAdopter(AdopterRequest adopterRequest) {
-        return null;
-    }
-
     public ShelterResponse getById(String id) {
         return null;
     }

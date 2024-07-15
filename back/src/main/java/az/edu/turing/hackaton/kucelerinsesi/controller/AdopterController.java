@@ -1,7 +1,9 @@
 package az.edu.turing.hackaton.kucelerinsesi.controller;
 
+import az.edu.turing.hackaton.kucelerinsesi.dto.request.AdopterRequest;
 import az.edu.turing.hackaton.kucelerinsesi.dto.request.LikeRequest;
 import az.edu.turing.hackaton.kucelerinsesi.dto.response.PetResponse;
+import az.edu.turing.hackaton.kucelerinsesi.dto.response.TokenResponse;
 
 import java.util.List;
 
@@ -17,5 +19,13 @@ public class AdopterController {
 
     public boolean unlike(LikeRequest likeRequest) {
         return true;
+    }
+
+    public boolean signupAsAdopter(AdopterRequest adopterRequest) {
+        return true;
+    }
+
+    public TokenResponse signinAsAdopter(AdopterRequest adopterRequest) {
+        return null;
     }
 }
