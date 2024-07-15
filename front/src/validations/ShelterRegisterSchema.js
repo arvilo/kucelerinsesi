@@ -1,5 +1,5 @@
 import Yup from "./validation";
-export const RegisterSchema = Yup.object({
+export const ShelterRegisterSchema = Yup.object({
     name: Yup.string().required().min(2),
     surname: Yup.string().required().min(2),
     email: Yup.string().required().email("Email is not valid"),

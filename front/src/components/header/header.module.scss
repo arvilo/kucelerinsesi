@@ -1,0 +1,62 @@
+.header{
+margin: 0 48px;
+padding: 10px 0;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.text-header{
+    font-size: 24px;
+}
+.links{
+    display: flex;
+    justify-content: space-around;
+    width:  400px;
+}
+.searchInp{
+    background-color: #F9F4F1;
+    padding: 2px;
+    border-radius: 12px;
+    padding-left: 2px;
+    width: 240px;
+    border:1px solid transparent;
+}
+
+.search{
+    position: relative;
+}
+.searchInp::placeholder{
+    font-size: 16px;
+    padding-left: 12px;
+}
+.icon{
+   position: absolute;
+    top: 50%;
+    color: #d5d4d4;
+    right: 10px;
+    font-size: 13px;
+    transform: translateY(-50%);
+}
+.btn1{
+padding:12px 16px 12px 16px ;
+border-radius: 12px;
+color: white;
+margin-right: 8px;
+font-weight: 600;
+background-color: #FB7E46;
+transition:0.5s;
+}
+.btn1:hover{
+    background: rgba(251, 126, 70, 0.8);
+
+    color: black;
+}
+.btn2{
+    padding:12px 16px 12px 16px ;
+    border-radius: 12px;
+font-weight: 600;
+
+    border: 1px solid #FB7E46;
+    color: black;
+    background-color: white;
+    }

@@ -8,13 +8,12 @@ const Input = ({ label, ...props }) => {
             <div className='text-sm shrink-0 text-gray-600'>{label}</div>
             <input
                 className={classNames({
-                    "w-full rounded h-10 border outline-none ps-2": true,
-                    "focus:border-black": !meta.error || !meta.touched,
+                    "w-full rounded-[8px] h-10 border outline-none ps-2  border-solid ": true,
+                    "border-[#fb7e46]": !meta.error || !meta.touched,
                     "border-red-600": meta.error && meta.touched,
                 })}
                 {...field}
                 {...props}
-                value={field.value || ""}
             />
             <ErrorMessage className='text-red-600' component={"small"} name={field.name} />
         </label>
