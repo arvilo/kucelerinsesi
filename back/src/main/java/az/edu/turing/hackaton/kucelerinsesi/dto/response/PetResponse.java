@@ -14,6 +14,8 @@ public class PetResponse {
     private String imagePath;
     private int shelterId;
     private String about;
+    private String message;
+    private String error;
 
     public int getId() {
         return id;

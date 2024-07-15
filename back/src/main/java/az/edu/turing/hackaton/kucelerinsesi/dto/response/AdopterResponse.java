@@ -7,6 +7,8 @@ public class AdopterResponse {
     private String surname;
     private String mail;
     private String birth;
+    private String message;
+    private String error;
 
     public int getId() {
         return id;

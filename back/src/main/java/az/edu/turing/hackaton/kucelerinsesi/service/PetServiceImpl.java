@@ -50,18 +50,18 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public void savePet(PetRequest petRequest) {
-        Pet pet = new Pet();
-        pet.setNickname(petRequest.getNickname());
-        pet.setAge(Integer.parseInt(petRequest.getAge()));
-        pet.setSpecies(Species.valueOf(petRequest.getSpecies()));
-        pet.setBreed(petRequest.getBreed());
-        pet.setGender(Gender.valueOf(petRequest.getGender()));
-        pet.setColor(petRequest.getColor());
-        pet.setImagePath(petRequest.getImagePath());
-        pet.setShelterId(Integer.parseInt(petRequest.getShelterId()));
-        pet.setAbout(petRequest.getAbout());
-        petDao.savePet(pet);
+    public void savePet(Pet pet) {
+        Pet pet1 = new Pet();
+        pet.setNickname(pet1.getNickname());
+        pet.setAge(Integer.parseInt(String.valueOf(pet1.getAge())));
+        pet.setSpecies(Species.valueOf(String.valueOf(pet1.getSpecies())));
+        pet.setBreed(pet1.getBreed());
+        pet.setGender(Gender.valueOf(String.valueOf(pet1.getGender())));
+        pet.setColor(pet1.getColor());
+        pet.setImagePath(pet1.getImagePath());
+        pet.setShelterId(Integer.parseInt(String.valueOf(pet1.getShelterId())));
+        pet.setAbout(pet1.getAbout());
+        petDao.savePet(pet1);
     }
 
     @Override

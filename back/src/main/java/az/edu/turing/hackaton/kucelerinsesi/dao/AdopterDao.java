@@ -8,6 +8,5 @@ public interface AdopterDao {
     List<Adopter> getAllAdopters();
     Adopter getAdopterById(int id);
     void saveAdopter(Adopter adopter);
-    List<Integer> getFavoritePetIdsByAdopterId(int adopterId);
     void saveFavoritePet(int adopterId, int petId);
 }
