@@ -21,11 +21,11 @@ public class AdopterController {
         return true;
     }
 
-    public boolean signupAsAdopter(AdopterRequest adopterRequest) {
+    public boolean signup(AdopterRequest adopterRequest) {
         return true;
     }
 
-    public TokenResponse signinAsAdopter(AdopterRequest adopterRequest) {
+    public TokenResponse signin(AdopterRequest adopterRequest) {
         return null;
     }
 }

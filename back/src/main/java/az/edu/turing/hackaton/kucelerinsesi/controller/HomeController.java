@@ -59,7 +59,7 @@ public class HomeController {
     public ResponseEntity<AdopterResponse> signupAdopter(@RequestBody AdopterRequest adopterRequest) {
         AdopterResponse ar;
         int statusCode;
-        if (adopterController.signupAsAdopter(adopterRequest)) {
+        if (adopterController.signup(adopterRequest)) {
             ar = AdopterResponse.builder().message("OK").build();
             statusCode = 200;
         } else {
@@ -72,7 +72,7 @@ public class HomeController {
 
     @PostMapping("signin/adopter")
     public ResponseEntity<TokenResponse> signinShelterAsAdopter(@RequestBody AdopterRequest adopterRequest) {
-        TokenResponse tr = adopterController.signinAsAdopter(adopterRequest);
+        TokenResponse tr = adopterController.signin(adopterRequest);
         int statusCode;
         if (tr != null) {
             statusCode = 200;
