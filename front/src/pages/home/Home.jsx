@@ -1,3 +1,4 @@
+import Slider from "@/components/slider/Slider";
 import { getShelters } from "@/services/shelters";
 import React, { useEffect } from "react";
 
@@ -9,7 +10,11 @@ const Home = () => {
     //     };
     //     fecthData();
     // }, []);
-    return <div>Home</div>;
+    return (
+        <section>
+            <Slider />
+        </section>
+    );
 };
 
 export default Home;
