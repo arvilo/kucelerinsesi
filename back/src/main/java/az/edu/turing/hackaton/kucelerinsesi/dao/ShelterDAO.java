@@ -13,12 +13,15 @@ public class ShelterDAO {
     private static String RESOURCE_PATH = "src/main/java/az/edu/turing/hackaton/kucelerinsesi/resource";
     private static final String SHELTER_FILE_PATH = RESOURCE_PATH.concat("/shelters.ser");
 
-    public void insertShelter(Shelter shelter) throws IOException {
-        List<Shelter> shelters = readSheltersFromFile();
-        shelter.setId(generateId(shelters));
-        shelters.add(shelter);
-        writeSheltersToFile(shelters);
+    public void insertShelter(Shelter shelter) throws ShelterFileException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(SHELTER_FILE_PATH, true)))) {
+            oos.writeObject(shelter);
+            oos.flush();
+        } catch (IOException e) {
+            throw new ShelterFileException("Error inserting shelter into file", e);
+        }
     }
+
 
     public Shelter selectShelter(Long id) {
         List<Shelter> shelters = readSheltersFromFile();
